@@ -1,0 +1,196 @@
+//==================================Object Creation===============================//
+
+package Section2;
+
+public class ObjectCreation 
+{
+
+	static int a = 10;
+	public static void test()
+	{
+		System.out.println("This is test() method...");
+	}
+	
+	public static void main(String[] args) 
+	{
+		ObjectCreation  ts = new ObjectCreation();
+		ts.test();
+		
+		System.out.println(ts.a);
+		
+		System.out.println(a);
+	}
+
+}
+//==================================Abstract Class===============================//
+package Section2;
+
+abstract class Sample 
+{
+	int v = 20;
+	static double v2 = 2.23;
+	
+	abstract public void test();
+	
+	public static void click()
+	{
+		System.out.println("This is concrite click() method...");
+	}
+	
+	public void display()
+	{
+		System.out.println("This is display() method...");
+	}
+}
+
+class Memo extends Sample
+{
+	@Override
+	public void test()
+	{
+		System.out.println("This is overriden test() method...");
+	}
+}
+
+public class Mainclass 
+{
+		public static void main(String[] args)
+		{
+			Sample s;
+			
+			System.out.println("This is main class...");
+			
+			Memo d = new Memo();
+			
+			System.out.println(Sample.v2);
+			
+			d.test();
+			
+			d.click();
+			
+			d.display();
+		}
+}
+//==================================Abstraction==================================//
+package Section2;
+
+interface User
+{
+	public static void logIn()
+	{
+		System.out.println("Login Success...:) :) :)");
+	}
+	public static void LogOut()
+	{
+		System.out.println("Logout Success...:) :) :)");
+	}
+	public void StoreData();
+}
+
+class Customer implements User
+{
+	@Override
+	public void StoreData()
+	{
+		System.out.println("Storing the customer data...");
+	}
+}
+
+class Seller implements User
+{
+	@Override
+	public void StoreData()
+	{
+		System.out.println("Storing thr Seller data...");
+	}
+}
+
+class AccountService
+{
+	public static User CreateCustomer()
+	{
+		User u1 = new Customer();
+		return u1;
+	}
+
+	public static User CreateSeller()
+	{
+		User u2 = new Seller();
+		return u2;
+	}
+}
+
+public class AbstractionManiclass 
+{
+	public static void main(String[] args) 
+	{
+		User u1 = AccountService.CreateCustomer();
+		u1.StoreData();
+
+		User u2 = AccountService.CreateSeller();
+		u2.StoreData();
+	}
+}
+//=================================Encapsulation===================================//
+package Section2;
+
+class Account
+{
+	private double bal;
+
+	public double getBal() 
+	{
+		return bal;
+	}
+
+	public void setBal(double bal) 
+	{
+		if (bal > 0)
+		{
+			this.bal = bal;
+		}
+	}
+}
+
+class Transation
+{
+	public static void deposit(double amt,Account ref)
+	{
+		double b1 = ref.getBal();    //Get Current balance
+			   b1 = b1 + amt;        //Calculate new balance
+			   ref.setBal(b1);       //Update new balance
+	}
+
+	public static void withdraw(double amt,Account ref)
+	{
+		double b1 = ref.getBal();
+			   b1 = b1 - amt;
+			   ref.setBal(b1);
+	}
+
+	public static void checkBal(Account ref)
+	{
+		System.out.println(ref.getBal());
+	}
+}
+
+public class EncapsulationMainclass 
+{
+
+	public static void main(String[] args) 
+	{
+		Account ac1 = new Account();
+		Account ac2 = new Account();
+//--------------------------------------------//
+		System.out.println("Account No:-1");
+		Transation.checkBal(ac1);
+		Transation.deposit(-2000,ac1);
+		Transation.checkBal(ac1);
+//--------------------------------------------//
+		System.out.println("Account No:-2");
+		Transation.checkBal(ac2);
+		Transation.deposit(2000,ac2);
+		Transation.checkBal(ac2);
+	}
+}
+//===================================================================================//
